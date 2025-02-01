@@ -99,6 +99,14 @@ Resources:
         Ref: dbSubnet
       RouteTableId:
         Ref: privateRouteTable
+  lmsNetworkAcl:
+      Type: AWS::EC2::NetworkAcl
+      Properties:
+         VpcId:
+           Ref: lmsVPC
+         Tags:
+         - Key: Name
+           Value: lms-nacl
 
   
   
