@@ -46,4 +46,19 @@ Resources:
       Tags:
       - Key: Name
         Value: lms-igw
+  attachlmsGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+         Ref: lmsVPC
+      InternetGatewayId:
+         Ref: lmsInternetGateway
+  
+
+
+
+
+
+
+
   
