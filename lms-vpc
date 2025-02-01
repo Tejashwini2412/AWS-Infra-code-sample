@@ -11,3 +11,30 @@ Resources:
       Tags:
        - Key: name
          Value: lms-vpc
+  webSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref lmsVPC
+      CidrBlock: 10.0.0.0/24
+      AvailabilityZone: "eu-west-2a"
+      Tags:
+      - Key: name
+        Value: web-subnet
+  appSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref lmsVPC
+      CidrBlock: 10.0.1.0/24
+      AvailabilityZone: "eu-west-2a"
+      Tags:
+      - Key: name
+        Value: app-subnet
+  dbSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref lmsVPC
+      CidrBlock: 10.0.2.0/24
+      AvailabilityZone: "eu-west-2a"
+      Tags:
+      - Key: name
+        Value: db-subnet
