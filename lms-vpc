@@ -189,6 +189,29 @@ Resources:
        Egress: true
        RuleAction: allow
        CidrBlock: 0.0.0.0/0
+  webSubnetNetworkAclAssociation:
+     Type: AWS::EC2::SubnetNetworkAclAssociation
+     Properties:
+       SubnetId:
+         Ref: webSubnet
+       NetworkAclId:
+         Ref: lmswebNetworkAcl
+  appSubnetNetworkAclAssociation:
+     Type: AWS::EC2::SubnetNetworkAclAssociation
+     Properties:
+       SubnetId:
+         Ref: appSubnet
+       NetworkAclId:
+         Ref: lmsappNetworkAcl
+  dbSubnetNetworkAclAssociation:
+     Type: AWS::EC2::SubnetNetworkAclAssociation
+     Properties:
+       SubnetId:
+         Ref: dbSubnet
+       NetworkAclId:
+         Ref: lmsdbNetworkAcl
+  
+  
   
   
 
