@@ -276,6 +276,29 @@ Resources:
        Tags:
        - Key: Name
          Value: lms-db-sg
+  lmsInstance:
+     Type: 'AWS::EC2::Instance'
+     Properties: 
+        ImageId: ami-028f3f570637b12d4
+        InstanceType: t2.micro
+        KeyName: awskey
+        SubnetId:
+          Ref: webSubnet
+        SecurityGroupIds:
+          - Ref: lmswebInstanceSecurityGroup
+        UserData:
+          Fn::Base64: !Sub |
+             #!/bin/bash
+             yum update -y
+             yum install httpd git -y
+             systemctl start httpd
+             systemctl enable httpd
+             git clone https://github.com/TejashwiniPulipati/webapp.git /var/www/html
+        Tags:
+          - Key: Name
+            Value: lms-server
+             
+
   
   
   
