@@ -210,6 +210,72 @@ Resources:
          Ref: dbSubnet
        NetworkAclId:
          Ref: lmsdbNetworkAcl
+  lmswebInstanceSecurityGroup:
+     Type: AWS::EC2::SecurityGroup
+     Properties:
+       GroupDescription: Allow http & ssh to client host
+       VpcId: !Ref lmsVPC
+       SecurityGroupIngress:
+         - IpProtocol: tcp
+           FromPort: 22
+           ToPort: 22
+           CidrIp: 0.0.0.0/0
+         - IpProtocol: tcp
+           FromPort: 80
+           ToPort: 80
+           CidrIp: 0.0.0.0/0
+       SecurityGroupEgress:
+         - IpProtocol: tcp
+           FromPort: 0
+           ToPort: 65535
+           CidrIp: 0.0.0.0/0
+       Tags:
+       - Key: Name
+         Value: lms-web-sg
+  lmsappInstanceSecurityGroup:
+     Type: AWS::EC2::SecurityGroup
+     Properties:
+       GroupDescription: Allow ssh & http to client host
+       VpcId: !Ref lmsVPC
+       SecurityGroupIngress:
+         - IpProtocol: tcp
+           FromPort: 22
+           ToPort: 22
+           CidrIp: 0.0.0.0/0
+         - IpProtocol: tcp
+           FromPort: 8080
+           ToPort: 8080
+           CidrIp: 0.0.0.0/0
+       SecurityGroupEgress:
+         - IpProtocol: tcp
+           FromPort: 0
+           ToPort: 65535
+           CidrIp: 0.0.0.0/0
+       Tags:
+       - Key: Name
+         Value: lms-app-sg
+  lmsdbInstanceSecurityGroup:
+     Type: AWS::EC2::SecurityGroup
+     Properties:
+       GroupDescription: Allow ssh & postgres to client host
+       VpcId: !Ref lmsVPC
+       SecurityGroupIngress:
+         - IpProtocol: tcp
+           FromPort: 22
+           ToPort: 22
+           CidrIp: 0.0.0.0/0
+         - IpProtocol: tcp
+           FromPort: 5432
+           ToPort: 5432
+           CidrIp: 0.0.0.0/0
+       SecurityGroupEgress:
+         - IpProtocol: tcp
+           FromPort: 0
+           ToPort: 65535
+           CidrIp: 0.0.0.0/0
+       Tags:
+       - Key: Name
+         Value: lms-db-sg
   
   
   
