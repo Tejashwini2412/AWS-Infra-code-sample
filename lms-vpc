@@ -19,8 +19,8 @@ Resources:
       AvailabilityZone: "eu-west-2a"
       MapPublicIpOnLaunch: "true"
       Tags:
-      - Key: Name
-        Value: web-subnet
+       - Key: Name
+         Value: web-subnet
   appSubnet:
     Type: AWS::EC2::Subnet
     Properties:
@@ -29,8 +29,8 @@ Resources:
       AvailabilityZone: "eu-west-2a"
       MapPublicIpOnLaunch: "true"
       Tags:
-      - Key: Name
-        Value: app-subnet
+       - Key: Name
+         Value: app-subnet
   dbSubnet:
     Type: AWS::EC2::Subnet
     Properties:
@@ -100,14 +100,14 @@ Resources:
       RouteTableId:
         Ref: privateRouteTable
   lmswebNetworkAcl:
-      Type: AWS::EC2::NetworkAcl
-      Properties:
-         VpcId:
-           Ref: lmsVPC
-         Tags:
-         - Key: Name
-           Value: lms-web-nacl
-  InboundRule:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId:
+        Ref: lmsVPC
+      Tags:
+      - Key: Name
+        Value: lms-web-nacl
+  webInboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
@@ -119,7 +119,7 @@ Resources:
        PortRange:
          From: 0
          To: 65535
-  OutboundRule:
+  webOutboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
@@ -130,14 +130,14 @@ Resources:
        RuleAction: allow
        CidrBlock: 0.0.0.0/0
   lmsappNetworkAcl:
-      Type: AWS::EC2::NetworkAcl
-      Properties:
-         VpcId:
-           Ref: lmsVPC
-         Tags:
-         - Key: Name
-           Value: lms-app-nacl
-  InboundRule:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+       VpcId:
+         Ref: lmsVPC
+       Tags:
+       - Key: Name
+         Value: lms-app-nacl
+  appInboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
@@ -149,7 +149,7 @@ Resources:
        PortRange:
          From: 0
          To: 65535
-  OutboundRule:
+  appOutboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
@@ -160,14 +160,14 @@ Resources:
        RuleAction: allow
        CidrBlock: 0.0.0.0/0
   lmsdbNetworkAcl:
-      Type: AWS::EC2::NetworkAcl
-      Properties:
-         VpcId:
-           Ref: lmsVPC
-         Tags:
-         - Key: Name
-           Value: lms-db-nacl
-  InboundRule:
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId:
+        Ref: lmsVPC
+      Tags:
+      - Key: Name
+        Value: lms-db-nacl
+  dbInboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
@@ -179,7 +179,7 @@ Resources:
        PortRange:
          From: 0
          To: 65535
-  OutboundRule:
+  dbOutboundRule:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
        NetworkAclId:
